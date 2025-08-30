@@ -2,7 +2,7 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 import uuid
 from datetime import datetime
-from backend.models.session import Session
+from src.models.database.session import Session
 
 class SessionRepository:
     def __init__(self, db: Session):

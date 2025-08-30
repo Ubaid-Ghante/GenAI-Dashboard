@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     ALLOW_CACHE: Optional[str] = "False"
     ALLOW_TRANSACTION_STORAGE: Optional[str] = "True"
     LOGGER_LEVEL: Optional[str] = "INFO"
+    API_HOST: Optional[str] = ""
+    API_PORT: Optional[int] = 8080
 
 config_path = pathlib.Path(__file__).parent / ".env"
 settings = Settings(_env_file=config_path, _env_file_encoding='utf-8')

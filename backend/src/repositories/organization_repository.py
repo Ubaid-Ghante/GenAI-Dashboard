@@ -1,7 +1,7 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
 import uuid
-from backend.models.organization import Organization
+from src.models.database.organization import Organization
 
 class OrganizationRepository:
     def __init__(self, db: Session):

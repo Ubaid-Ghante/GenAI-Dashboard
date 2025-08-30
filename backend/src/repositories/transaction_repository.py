@@ -2,7 +2,7 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 import uuid
 from datetime import datetime
-from backend.models.transaction import Transaction
+from src.models.database.transaction import Transaction
 
 class TransactionRepository:
     def __init__(self, db: Session):

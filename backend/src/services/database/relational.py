@@ -1,6 +1,4 @@
 import traceback
-from sqlalchemy.ext.declarative import declarative_base
-Base = declarative_base()
 
 class RelationalDatabaseClient:
     def __init__(self, database: str, url: str, key: str, **kwargs):
@@ -9,7 +7,7 @@ class RelationalDatabaseClient:
         self.key = key
         self.database_type = database.lower()
         
-        if self.database_type == "postgres":
+        if self.database_type.lower() == "postgres":
             self.adapter = self.SQLAlchemyAdapter(self.url, **kwargs)
         else:
             raise ValueError(f"Unsupported vectorstore type: {self.database_type}")
@@ -19,6 +17,9 @@ class RelationalDatabaseClient:
     
     def run_transaction(self, func, *args, **kwargs):
         return self.adapter.run_transaction(func, *args, **kwargs)
+
+    def ping(self):
+        return self.adapter.ping()
         
     class SQLAlchemyAdapter:
         def __init__(self, url: str = None, **kwargs):
@@ -36,6 +37,18 @@ class RelationalDatabaseClient:
         def get_client(self):
             return self.session()
         
+        def ping(self):
+            session = None
+            try:
+                session = self.get_client()
+                session.execute('SELECT 1')
+                return True
+            except Exception:
+                return False
+            finally:
+                if session is not None:
+                    session.close()
+            
         def run_transaction(self, func, *args, **kwargs):
             db = self.get_client()
             close_db = True

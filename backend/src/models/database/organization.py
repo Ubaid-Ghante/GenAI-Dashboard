@@ -4,7 +4,8 @@ from sqlalchemy import Column, String, DateTime
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.sql import func
 
-from backend.services.database.relational import Base
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 
 
 class Organization(Base):

@@ -6,8 +6,9 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship, object_session
 
 
-from backend.models.transaction import Transaction
-from backend.services.database.relational import Base
+from src.models.database.transaction import Transaction
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 
 
 class Session(Base):

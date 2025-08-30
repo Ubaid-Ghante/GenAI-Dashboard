@@ -5,7 +5,8 @@ from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
-from backend.services.database.relational import Base
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
